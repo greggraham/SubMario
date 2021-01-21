@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class SubMarioGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
+	Texture ;
 	
 	@Override
 	public void create () {
+		// load images
+
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 	}

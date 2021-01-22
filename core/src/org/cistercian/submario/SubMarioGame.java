@@ -13,9 +13,9 @@ public class SubMarioGame extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-		// load images
-
 		batch = new SpriteBatch();
+
+		// load images
 		crateImg = new Texture("crate.png");
 		playerImg = new Texture("player.png");
 	}

@@ -8,19 +8,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Player {
+public class Player extends Sprite {
     private final float speed = 100; // pixels per second
     private float deltaX, deltaY;
-    private Rectangle rect;
-    private Texture texture;
 
     public Player(Texture playerImage) {
-        texture = playerImage;
-        rect = new Rectangle();
-        rect.x = 0;
-        rect.y = 0;
-        rect.width = texture.getWidth();
-        rect.height = texture.getHeight();
+        super(playerImage);
         stopMotion();
     }
 
@@ -65,10 +58,6 @@ public class Player {
     public void move() {
         rect.x += deltaX * Gdx.graphics.getDeltaTime();
         rect.y += deltaY * Gdx.graphics.getDeltaTime();
-    }
-
-    public void draw(SpriteBatch batch) {
-        batch.draw(texture, rect.x, rect.y);
     }
 
     private void stopMotion() {

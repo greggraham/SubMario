@@ -6,11 +6,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.ArrayList;
+
 public class SubMarioGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture crateImg;
+	Texture crateImg, snowImg, redBrickImg, brownBrickImg;
 	Texture playerImg;
 	Player player;
+	ArrayList<Sprite> platforms = new ArrayList<Sprite>();
 
 	@Override
 	public void create () {
@@ -18,6 +21,9 @@ public class SubMarioGame extends ApplicationAdapter {
 
 		// load images
 		crateImg = new Texture("crate.png");
+		snowImg = new Texture("snow.png");
+		redBrickImg = new Texture("red_brick.png");
+		brownBrickImg = new Texture("brown_brick.png");
 		playerImg = new Texture("player.png");
 
 		// create player

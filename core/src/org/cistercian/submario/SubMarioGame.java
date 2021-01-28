@@ -13,7 +13,7 @@ public class SubMarioGame extends ApplicationAdapter {
 	Texture crateImg, snowImg, redBrickImg, brownBrickImg;
 	Texture playerImg;
 	Player player;
-	ArrayList<Sprite> platforms = new ArrayList<Sprite>();
+	Map gameMap = new Map();
 
 	@Override
 	public void create () {
@@ -25,6 +25,9 @@ public class SubMarioGame extends ApplicationAdapter {
 		redBrickImg = new Texture("red_brick.png");
 		brownBrickImg = new Texture("brown_brick.png");
 		playerImg = new Texture("player.png");
+
+		// load map
+		gameMap.load("map.csv");
 
 		// create player
 		player = new Player(playerImg);

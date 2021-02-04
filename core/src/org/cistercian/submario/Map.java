@@ -10,15 +10,16 @@ public class Map {
     private List<Sprite> platforms = new ArrayList<Sprite>();
 
     public void load(String fileName) {
+        File inFile = new File("core/assets", fileName);
         try {
-            Scanner fileReader = new Scanner(new File(fileName));
+            Scanner fileReader = new Scanner(inFile);
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
                 // process the line
                 parseMap(line);
             }
         } catch (FileNotFoundException e) {
-            System.err.printf("Map file %s not found.", fileName);
+            System.err.printf("Map file %s not found.", inFile.getAbsolutePath());
             System.exit(-1);
         }
     }

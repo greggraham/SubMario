@@ -17,6 +17,11 @@ public class Player extends Sprite {
         stopMotion();
     }
 
+    public Player(Texture playerImage, float x, float y) {
+        super(playerImage, x, y);
+        stopMotion();
+    }
+
     public InputProcessor getInputAdapter() {
         return (new InputAdapter() {
             @Override

@@ -9,15 +9,16 @@ public class Sprite {
     protected Texture texture;
 
     public Sprite(Texture spriteImage) {
-        rect = new Rectangle();
-        texture = spriteImage;
-        rect.width = texture.getWidth();
-        rect.height = texture.getHeight();
+        this(spriteImage, 0, 0);
     }
 
-    public Sprite(Texture spriteImage, float centerX, float centerY) {
-        this(spriteImage);
-        setCenter(centerX, centerY);
+    public Sprite(Texture spriteImage, float x, float y) {
+        rect = new Rectangle();
+        texture = spriteImage;
+        rect.x = x;
+        rect.y = y;
+        rect.width = texture.getWidth();
+        rect.height = texture.getHeight();
     }
 
     public void draw(SpriteBatch batch) {
@@ -28,4 +29,37 @@ public class Sprite {
         rect.x = centerX - rect.width / 2;
         rect.y = centerY - rect.height / 2;
     }
+
+    public void setLeft(float left) {
+        rect.x = left;
+    }
+
+    public float getLeft() {
+        return rect.x;
+    }
+
+    public void setRight(float right) {
+        rect.x = right - rect.width;
+    }
+
+    public float getRight() {
+        return rect.x + rect.width;
+    }
+
+    public void setTop(float top) {
+        rect.y = top - rect.height;
+    }
+
+    public float getTop() {
+        return rect.y + rect.height;
+    }
+
+    public void setBottom(float bottom) {
+        rect.y = bottom;
+    }
+
+    public float getBottom() {
+        return rect.y;
+    }
+
 }

@@ -1,5 +1,6 @@
 package org.cistercian.submario;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -17,7 +18,7 @@ public class Map {
         int tileSize = textures[0].getWidth();
         int tileCenterOffset = tileSize / 2;
         try {
-            int row = 0;
+            int row = 1;
             Scanner fileReader = new Scanner(inFile);
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
@@ -26,8 +27,8 @@ public class Map {
                 for (int col = 0; col < values.length; col++) {
                     int spriteCode = Integer.parseInt(values[col]);
                     if (spriteCode > 0) {
-                        Sprite s = new Sprite(textures[spriteCode - 1], tileCenterOffset + tileSize * col,
-                                tileCenterOffset + tileSize * row);
+                        Sprite s = new Sprite(textures[spriteCode - 1], tileSize * col,
+                                Gdx.graphics.getHeight() - tileSize * row);
                         platforms.add(s);
                     }
                 }

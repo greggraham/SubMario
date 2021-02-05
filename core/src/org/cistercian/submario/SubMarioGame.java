@@ -30,13 +30,16 @@ public class SubMarioGame extends ApplicationAdapter {
 		gameMap.load("map.csv", new Texture[]{redBrickImg, snowImg, brownBrickImg, crateImg});
 
 		// create player
-		player = new Player(playerImg);
+		player = new Player(playerImg, 200, 50);
 		Gdx.input.setInputProcessor(player.getInputAdapter());
 	}
 
 	@Override
 	public void render () {
+		// Moving
 		player.move();
+
+		// Drawing
 		Gdx.gl.glClearColor(0.1f, 0.3f, 0.2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();

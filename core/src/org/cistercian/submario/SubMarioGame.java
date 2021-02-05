@@ -27,7 +27,7 @@ public class SubMarioGame extends ApplicationAdapter {
 		playerImg = new Texture("player.png");
 
 		// load map
-		gameMap.load("map.csv");
+		gameMap.load("map.csv", new Texture[]{redBrickImg, snowImg, brownBrickImg, crateImg});
 
 		// create player
 		player = new Player(playerImg);
@@ -40,8 +40,8 @@ public class SubMarioGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0.1f, 0.3f, 0.2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(crateImg, 300, 0);
 		player.draw(batch);
+		gameMap.draw(batch);
 		batch.end();
 	}
 	

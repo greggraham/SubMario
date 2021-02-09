@@ -26,8 +26,7 @@ public class Sprite {
     }
 
     public void setCenter(float centerX, float centerY) {
-        rect.x = centerX - rect.width / 2;
-        rect.y = centerY - rect.height / 2;
+        rect.setCenter(centerX, centerY);
     }
 
     public void setLeft(float left) {
@@ -62,4 +61,7 @@ public class Sprite {
         return rect.y;
     }
 
+    public boolean checkCollision(Sprite other) {
+        return rect.overlaps(other.rect);
+    }
 }

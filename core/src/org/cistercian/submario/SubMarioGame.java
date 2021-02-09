@@ -33,7 +33,7 @@ public class SubMarioGame extends ApplicationAdapter {
 		gameMap.load("map.csv", new Texture[]{redBrickImg, snowImg, brownBrickImg, crateImg});
 
 		// create player
-		player = new Player(playerImg, 200, 50);
+		player = new Player(playerImg, gameMap, 200, 50);
 		Gdx.input.setInputProcessor(player.getInputAdapter());
 	}
 

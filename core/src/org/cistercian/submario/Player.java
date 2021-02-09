@@ -5,20 +5,23 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
+
+import java.util.List;
 
 public class Player extends Sprite {
-    private final float speed = 100; // pixels per second
+    private final static float MOVE_SPEED = 100; // pixels per second
+    private final static float JUMP_SPEED = 320; // pixels per second
+    private final static float GRAVITY = 260; // pixels per second per second
     private float deltaX, deltaY;
+    private Map gameMap;
 
-    public Player(Texture playerImage) {
-        super(playerImage);
-        stopMotion();
+    public Player(Texture playerImage, Map gameMap) {
+        this(playerImage, gameMap, 0, 0);
     }
 
-    public Player(Texture playerImage, float x, float y) {
+    public Player(Texture playerImage, Map gameMap, float x, float y) {
         super(playerImage, x, y);
+        this.gameMap = gameMap;
         stopMotion();
     }
 
@@ -28,16 +31,17 @@ public class Player extends Sprite {
             public boolean keyDown(int keycode) {
                 switch (keycode) {
                     case Input.Keys.LEFT:
-                        deltaX = -speed;
+                        deltaX = -MOVE_SPEED;
                         break;
                     case Input.Keys.RIGHT:
-                        deltaX = speed;
+                        deltaX = MOVE_SPEED;
                         break;
                     case Input.Keys.UP:
-                        deltaY = speed;
-                        break;
-                    case Input.Keys.DOWN:
-                        deltaY = -speed;
+                        System.out.println("up");
+                        if (isOnPlatform()) {
+                            System.out.println("jump");
+                            deltaY = JUMP_SPEED;
+                        }
                         break;
                 }
                 return true;
@@ -50,10 +54,6 @@ public class Player extends Sprite {
                     case Input.Keys.RIGHT:
                         deltaX = 0;
                         break;
-                    case Input.Keys.UP:
-                    case Input.Keys.DOWN:
-                        deltaY = 0;
-                        break;
                 }
                 return true;
             }
@@ -61,12 +61,27 @@ public class Player extends Sprite {
     }
 
     public void move() {
-        rect.x += deltaX * Gdx.graphics.getDeltaTime();
+        deltaY -= GRAVITY;
         rect.y += deltaY * Gdx.graphics.getDeltaTime();
+        var collisions = gameMap.checkPlatformCollision(this);
+        if (collisions.size() > 0) {
+            var p =
+            if (deltaY < 0) {
+                setBottom(collisions);
+            }
+        }
+        rect.x += deltaX * Gdx.graphics.getDeltaTime();
     }
 
     private void stopMotion() {
         deltaX = 0;
         deltaY = 0;
+    }
+
+    private boolean isOnPlatform() {
+        rect.y -= 5;
+        List<Sprite> collisions = gameMap.checkPlatformCollision(this);
+        rect.y += 5;
+        return collisions.size() > 0;
     }
 }

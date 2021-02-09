@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 
 public class SubMarioGame extends ApplicationAdapter {
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 600;
+
 	SpriteBatch batch;
 	Texture crateImg, snowImg, redBrickImg, brownBrickImg;
 	Texture playerImg;
@@ -27,21 +30,24 @@ public class SubMarioGame extends ApplicationAdapter {
 		playerImg = new Texture("player.png");
 
 		// load map
-		gameMap.load("map.csv");
+		gameMap.load("map.csv", new Texture[]{redBrickImg, snowImg, brownBrickImg, crateImg});
 
 		// create player
-		player = new Player(playerImg);
+		player = new Player(playerImg, gameMap, 200, 50);
 		Gdx.input.setInputProcessor(player.getInputAdapter());
 	}
 
 	@Override
 	public void render () {
+		// Moving
 		player.move();
+
+		// Drawing
 		Gdx.gl.glClearColor(0.1f, 0.3f, 0.2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(crateImg, 300, 0);
 		player.draw(batch);
+		gameMap.draw(batch);
 		batch.end();
 	}
 	

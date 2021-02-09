@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 import java.util.List;
 
 public class Player extends Sprite {
-    private final static float MOVE_SPEED = 100; // pixels per second
-    private final static float JUMP_SPEED = 320; // pixels per second
-    private final static float GRAVITY = 260; // pixels per second per second
+    private final static float MOVE_SPEED = 150; // pixels per second
+    private final static float JUMP_SPEED = 580; // pixels per second
+    private final static float GRAVITY = 1000; // pixels per second per second
     private float deltaX, deltaY;
     private Map gameMap;
 
@@ -61,16 +61,31 @@ public class Player extends Sprite {
     }
 
     public void move() {
-        deltaY -= GRAVITY;
+        // Vertical motion
+        deltaY -= GRAVITY * Gdx.graphics.getDeltaTime();
         rect.y += deltaY * Gdx.graphics.getDeltaTime();
-        var collisions = gameMap.checkPlatformCollision(this);
+        List<Sprite> collisions = gameMap.checkPlatformCollision(this);
         if (collisions.size() > 0) {
-            var p =
-            if (deltaY < 0) {
-                setBottom(collisions);
+            Sprite p = collisions.get(0);
+            if (deltaY < 0) {  // going down
+                setBottom(p.getTop());
+            } else { // going up
+                setTop(p.getBottom());
+            }
+            deltaY = 0;
+        }
+
+        // Horizontal motion
+        rect.x += deltaX * Gdx.graphics.getDeltaTime();
+        collisions = gameMap.checkPlatformCollision(this);
+        if (collisions.size() > 0) {
+            Sprite p = collisions.get(0);
+            if (deltaX < 0) {  // going left
+                setLeft(p.getRight());
+            } else { // going right
+                setRight(p.getLeft());
             }
         }
-        rect.x += deltaX * Gdx.graphics.getDeltaTime();
     }
 
     private void stopMotion() {

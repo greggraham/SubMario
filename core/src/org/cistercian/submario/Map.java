@@ -45,4 +45,14 @@ public class Map {
             p.draw(batch);
         }
     }
+
+    public List<Sprite> checkPlatformCollision(Sprite s) {
+        List<Sprite> collisionList = new ArrayList<Sprite>();
+        for (Sprite p: platforms) {
+            if (s.checkCollision(p)) {
+                collisionList.add(p);
+            }
+        }
+        return collisionList;
+    }
 }

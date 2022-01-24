@@ -6,14 +6,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import java.util.ArrayList;
-
 public class SubMarioGame extends ApplicationAdapter {
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
 
 	SpriteBatch batch;
-	Texture crateImg, snowImg, redBrickImg, brownBrickImg;
+	Texture crateImg;
+	Texture snowImg;
+	Texture redBrickImg;
+	Texture brownBrickImg;
 	Texture playerImg;
 	Player player;
 	Map gameMap = new Map();
